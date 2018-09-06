@@ -13,40 +13,47 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Veículos</h1>
+    <header class="bg-warning"><h1>Veículos</h1></header>
+    <div class="content-fluid col-md-10 col-md-push-1">
     <?php
-        $link = "EXPORT_B0487_487002.xml";
-        echo $xml = simplexml_load_file($link)->CargaVeiculos;
+        //Declarar o link do arquivo em XML
+        $link1 = 'http://www.brdealer.com.br/portais/EXPORT_B0487_487001.xml';
+        
+        
+        //Carregar o Link do arquivo XML
+        $xml = simplexml_load_file($link1);
+        
+        echo "<strong>Link Carregado:</strong> $link1 <br>";
     
-        foreach($xml->Veiculo as $item):
-        $i = 1;
-        //faz o loop nas tag com o nome "item"
-        //exibe o valor das tags que estão dentro da tag "item"
-        //utilizamos a função "utf8_decode" para exibir os caracteres corretamente
-        echo "<strong>Loja:</strong> ".utf8_decode($item -> Loja)."<br />";
-        echo "<strong>Código:</strong> ".utf8_decode($item -> Codigo)."<br />";
-        echo "<strong>Tipo:</strong> ".utf8_decode($item -> Tipo)."<br />";
-        echo "<strong>ZeroKM:</strong> ".utf8_decode($item -> ZeroKM)."<br />";
-        echo "<strong>Placa:</strong> ".utf8_decode($item -> Placa)."<br />";
-        echo "<strong>Marca:</strong> ".utf8_decode($item -> Marca)."<br />";
-        echo "<strong>ModeloVersao:</strong> ".utf8_decode($item -> ModeloVersao)."<br />";
-        echo "<strong>AnoFabr:</strong> ".utf8_decode($item -> AnoFabr)."<br />";
-        echo "<strong>AnoModelo:</strong> ".utf8_decode($item -> AnoModelo)."<br />";
-        echo "<strong>Combustivel:</strong> ".utf8_decode($item -> Combustivel)."<br />";
-        echo "<strong>Cambio:</strong> ".utf8_decode($item -> Cambio)."<br />";
-        echo "<strong>Portas:</strong> ".utf8_decode($item -> Portas)."<br />";
-        echo "<strong>Cor:</strong> ".utf8_decode($item -> Cor)."<br />";
-        echo "<strong>Km:</strong> ".utf8_decode($item -> Km)."<br />";
-        echo "<strong>Preco:</strong> ".utf8_decode($item -> Preco)."<br />";
-        echo "<strong>Equipamentos:</strong> ".utf8_decode($item -> Equipamentos)."<br />";
-        echo "<strong>Detalhes:</strong> ".utf8_decode($item -> Detalhes)."<br />";
-        echo "<strong>Observacao:</strong> ".utf8_decode($item -> Observacao)."<br />";
-        echo "<strong>EmDestaque:</strong> ".utf8_decode($item -> EmDestaque)."<br />";
+        //faz o loop nas tag com o nome "Veiculo"
+        foreach($xml->Veiculo as $Veiculo):
+        
+        //exibe o valor das tags que estão dentro da tag "Veiculo"
+        //utilizamos a função "utf8_encode(utf8_decode())" para exibir os caracteres corretamente
+        echo "<strong>Loja:</strong> ".utf8_encode(utf8_decode($Veiculo -> Loja))."<br />";
+        echo "<strong>Código:</strong> ".utf8_encode(utf8_decode($Veiculo -> Codigo))."<br />";
+        echo "<strong>Tipo:</strong> ".utf8_encode(utf8_decode($Veiculo -> Tipo))."<br />";
+        echo "<strong>ZeroKM:</strong> ".utf8_encode(utf8_decode($Veiculo -> ZeroKM))."<br />";
+        echo "<strong>Placa:</strong> ".utf8_encode(utf8_decode($Veiculo -> Placa))."<br />";
+        echo "<strong>Marca:</strong> ".utf8_encode(utf8_decode($Veiculo -> Marca))."<br />";
+        echo "<strong>ModeloVersao:</strong> ".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))."<br />";
+        echo "<strong>AnoFabr:</strong> ".utf8_encode(utf8_decode($Veiculo -> AnoFabr))."<br />";
+        echo "<strong>AnoModelo:</strong> ".utf8_encode(utf8_decode($Veiculo -> AnoModelo))."<br />";
+        echo "<strong>Combustivel:</strong> ".utf8_encode(utf8_decode($Veiculo -> Combustivel))."<br />";
+        echo "<strong>Cambio:</strong> ".utf8_encode(utf8_decode($Veiculo -> Cambio))."<br />";
+        echo "<strong>Portas:</strong> ".utf8_encode(utf8_decode($Veiculo -> Portas))."<br />";
+        echo "<strong>Cor:</strong> ".utf8_encode(utf8_decode($Veiculo -> Cor))."<br />";
+        echo "<strong>Km:</strong> ".utf8_encode(utf8_decode($Veiculo -> Km))."<br />";
+        echo "<strong>Preco:</strong> ".utf8_encode(utf8_decode($Veiculo -> Preco))."<br />";
+        echo "<strong>Equipamentos:</strong> ".utf8_encode(utf8_decode($Veiculo -> Equipamentos))."<br />";
+        echo "<strong>Detalhes:</strong> ".utf8_encode(utf8_decode($Veiculo -> Detalhes))."<br />";
+        echo "<strong>Observacao:</strong> ".utf8_encode(utf8_decode($Veiculo -> Observacao))."<br />";
+        echo "<strong>EmDestaque:</strong> ".utf8_encode(utf8_decode($Veiculo -> EmDestaque))."<br />";
         echo "<strong>Fotos:</strong> <br />";
-        foreach($item->Fotos->FotoURL as $itemFotos){
+        foreach($Veiculo->Fotos->FotoURL as $VeiculoFotos){
             ?>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                <img class="img-responsive" src="<?php echo utf8_decode($itemFotos)?>" alt="<?php echo utf8_decode($item -> Marca)?>">
+                <img class="img-responsive" src="<?php echo utf8_encode(utf8_decode($VeiculoFotos))?>" alt="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))?>" title="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))?>">
             </div>
             <?php
         }
@@ -55,5 +62,6 @@
         <?php
     endforeach; //fim do foreach
     ?>
+    </div>
 </body>
 </html>

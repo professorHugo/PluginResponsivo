@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Veículos BRDealer</title>
+    <link rel="stylesheet" href="css/master.css" media="all">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -14,10 +15,10 @@
 </head>
 <body>
     <header class="bg-danger"><h1>Veículos</h1></header>
-    <div class="content-fluid col-md-10 col-md-push-1">
+    <div class="content-fluid col-md-8 col-md-push-1 bg-success">
     <?php
         //Declarar o link do arquivo em XML
-        $link1 = 'http://www.brdealer.com.br/portais/EXPORT_B0487_487001.xml';
+        $link1 = 'http://www.brdealer.com.br/portais/EXPORT_B0850_3225.xml';
 
 
         //Carregar o Link do arquivo XML
@@ -27,7 +28,20 @@
 
         //faz o loop nas tag com o nome "Veiculo"
         foreach($xml->Veiculo as $Veiculo):
+        ?>
+        <div class="col-md-12">
+        
+        <?php
+        foreach($Veiculo->Fotos->FotoURL as $VeiculoFotos){
+            ?>
+               <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                <img class="img-responsive" src="<?php echo utf8_encode(utf8_decode($VeiculoFotos))?>" alt="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))?>" title="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao)) ?>">
+                </div>
+            <?php
+        }
+        ?>
 
+        <?php
         //exibe o valor das tags que estão dentro da tag "Veiculo"
         //utilizamos a função "utf8_encode(utf8_decode())" para exibir os caracteres corretamente
         echo "<strong>Loja:</strong> ".utf8_encode(utf8_decode($Veiculo -> Loja))."<br />";
@@ -50,18 +64,15 @@
         echo "<strong>Observacao:</strong> ".utf8_encode(utf8_decode($Veiculo -> Observacao))."<br />";
         echo "<strong>EmDestaque:</strong> ".utf8_encode(utf8_decode($Veiculo -> EmDestaque))."<br />";
         echo "<strong>Fotos:</strong> <br />";
-        foreach($Veiculo->Fotos->FotoURL as $VeiculoFotos){
-            ?>
-            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                <img class="img-responsive" src="<?php echo utf8_encode(utf8_decode($VeiculoFotos))?>" alt="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))?>" title="<?php echo utf8_encode(utf8_decode($Veiculo -> Marca))."-".utf8_encode(utf8_decode($Veiculo -> ModeloVersao))?>">
-            </div>
-            <?php
-        }
         ?>
-        <div class="clearfix"></div>
+        </div>
+        
         <?php
     endforeach; //fim do foreach
     ?>
+    </div>
+    <div class="content-fluid col-md-3 bg-warning">
+        Aqui vai ficar o filtro
     </div>
 </body>
 </html>

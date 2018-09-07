@@ -13,21 +13,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="bg-warning"><h1>Veículos</h1></header>
+    <header class="bg-danger"><h1>Veículos</h1></header>
     <div class="content-fluid col-md-10 col-md-push-1">
     <?php
         //Declarar o link do arquivo em XML
         $link1 = 'http://www.brdealer.com.br/portais/EXPORT_B0487_487001.xml';
-        
-        
+
+
         //Carregar o Link do arquivo XML
         $xml = simplexml_load_file($link1);
-        
+
         echo "<strong>Link Carregado:</strong> $link1 <br>";
-    
+
         //faz o loop nas tag com o nome "Veiculo"
         foreach($xml->Veiculo as $Veiculo):
-        
+
         //exibe o valor das tags que estão dentro da tag "Veiculo"
         //utilizamos a função "utf8_encode(utf8_decode())" para exibir os caracteres corretamente
         echo "<strong>Loja:</strong> ".utf8_encode(utf8_decode($Veiculo -> Loja))."<br />";
